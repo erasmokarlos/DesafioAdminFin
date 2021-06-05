@@ -31,11 +31,11 @@ contas_venc2 = list()
 contas_venc = list()
 index1 = 0
 
-login = ['erasmoks.junior@gmail.com', 'Er@smo17']
-para = 'juniorerasmo02@hotmail.com'
+login = ['email_remetente', 'senha']
+para = 'email_Destinatário'
 topico = 'Alerta de Vencimento'
 
-colunasBF = pd.read_excel("ContasaPagar.xlsx", usecols="B,F")
+colunasBF = pd.read_excel("ContasaPagar.xlsx", usecols="B,F") # faz uma verredura na coluna B e F em busca de atrasos
 x = pd.read_excel("ContasaPagar.xlsx", usecols="F")
 
 for index, item in enumerate(colunasBF['Prazo']):  # iterar sobre a coluna "Prazo"
