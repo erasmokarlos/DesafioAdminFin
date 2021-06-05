@@ -1,6 +1,6 @@
 """
 desc: script destinado a receber dados de uma planilha e enviar para o email alertas sobre limites de prazos
-Auth: 333333333
+Auth: treinee Admfin
 ultima modificação: 03/06/2021
 """
 
