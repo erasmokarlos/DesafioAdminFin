@@ -24,42 +24,34 @@ def disparar_email_pelo_Gmail(login, para, topico, msg):
 
 # ----- inicio ---------
 # listas a serem usadas
-
-
-
 contas_venc2 = list()
 contas_venc = list()
 index1 = 0
+# -------- Configs -----
 
 login = ['email_remetente', 'senha']
 para = 'email_Destinatário'
 topico = 'Alerta de Vencimento'
 
+# -------------------------------------------------------
 colunasBF = pd.read_excel("ContasaPagar.xlsx", usecols="B,F") # faz uma verredura na coluna B e F em busca de atrasos
 x = pd.read_excel("ContasaPagar.xlsx", usecols="F")
-
-for index, item in enumerate(colunasBF['Prazo']):  # iterar sobre a coluna "Prazo"
-    if item == "Vence Hoje":  # identificar contas que vencem hoje
-        contas_venc.append(index)
-for venc in contas_venc:
-    for item in colunasBF['Descrição']:
-        if index1 == venc:
-            contas_venc2.append(item)
-        index1 += 1
-c = 0
-
+# -------- Looping de verificação continua --------------
 while True:
     try:
         for i in x['Prazo']:
+            print("Vericando atrasos")
             if i == "Vence Hoje":
-                for k in contas_venc2:
-                    msg = f'Existe uma conta para pagar hoje de {contas_venc2}, verifique a tabela de Contas a Pagar !\n\n' \
-                    f'Att fulano'
-                    disparar_email_pelo_Gmail(login, para, topico, msg)
-            elif i == "Vencido":
-                msg = f'Existe uma conta vencida, verifique a tabela de Contas a Pagar !\n\nAtt fulano'
+                print("Existe uma conta para vencer hoje")
+                msg = f'Existe uma conta para pagar HOJE!, verifique a tabela de Contas a Pagar !\n\n' \
+                f'Att fulano'
+                print("Disparando Email de alerta")
                 disparar_email_pelo_Gmail(login, para, topico, msg)
-            c += 1
+            elif i == "Vencido":
+                print("Existe uma conta Vencida!")                
+                msg = f'Existe uma conta vencida, verifique a tabela de Contas a Pagar !\n\nAtt fulano'
+                print("Disparando Email de alerta")
+                disparar_email_pelo_Gmail(login, para, topico, msg)
         print("Retorno com a verificação em 12 horas")
         sleep(43200)  # 43200 seg são 12 horas
 
